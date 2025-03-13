@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - PrintShare</title>
+    <link rel="stylesheet" href="account.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <h1>Settings</h1>
+        <div class="actions">
+            <button onclick="window.location.href='index.html'">Home</button>
+            <button onclick="window.location.href='account.html'">Account</button>
+            <button onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <!-- Settings Container -->
+    <div class="container">
+        <header>
+            <h1>Account Settings</h1>
+        </header>
+        <main>
+            <!-- Settings Form -->
+            <section class="settings-form">
+                <h3>Update Profile</h3>
+                <form id="update-profile-form">
+                    <input type="email" id="new-email" placeholder="Update Email">
+                    <input type="password" id="new-password" placeholder="Update Password">
+                    <label for="profile-picture-upload">Update Profile Picture</label>
+                    <input type="file" id="profile-picture-upload" accept="image/*">
+
+                    <!-- Profile Image Preview -->
+                    <div id="image-preview-container">
+                        <p>Preview:</p>
+                        <img id="image-preview" src="#" alt="Profile Picture Preview">
+                    </div>
+
+                    <button type="submit">Update Profile</button>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const userId = localStorage.getItem('userId');
+
+            if (!userId) {
+                alert('No user information found. Please log in.');
+                window.location.href = 'login.html';
+            }
+
+            const profilePictureInput = document.getElementById('profile-picture-upload');
+            const imagePreview = document.getElementById('image-preview');
+
+            profilePictureInput.addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        imagePreview.src = e.target.result;
+                        imagePreview.style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    imagePreview.src = '#';
+                    imagePreview.style.display = 'none';
+                }
+            });
+
+            document.getElementById('update-profile-form').addEventListener('submit', (event) => {
+                event.preventDefault();
+
+                const newEmail = document.getElementById('new-email').value.trim();
+                const newPassword = document.getElementById('new-password').value.trim();
+                const profilePictureFile = profilePictureInput.files[0];
+
+                const formData = new FormData();
+                formData.append('userId', userId);
+                if (newEmail) formData.append('email', newEmail);
+                if (newPassword) formData.append('password', newPassword);
+                if (profilePictureFile) formData.append('profilePicture', profilePictureFile);
+
+                fetch('/update-profile', {
+                    method: 'POST',
+                    body: formData,
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data.success) {
+                            alert('Profile updated successfully!');
+                            window.location.href = 'account.html';
+                        } else {
+                            throw new Error(data.message || 'Error updating profile');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error updating profile:', error);
+                        alert('Error updating profile. Please try again.');
+                    });
+            });
+        });
+
+        function logout() {
+            localStorage.clear();
+            alert('You have been logged out.');
+            window.location.reload();
+        }
+    </script>
+</body>
+</html>

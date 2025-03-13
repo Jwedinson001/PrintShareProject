@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - PrintShare</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="global.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="content" style="justify-content: center; align-items: center; flex-direction: column;">
+            <h1 style="margin-bottom: 20px;">Create an Account</h1>
+            <form id="signup-form" enctype="multipart/form-data" onsubmit="handleSignUp(event)">
+                <div style="margin-bottom: 15px;">
+                    <input type="text" id="username" placeholder="Username" required style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; font-size: 1em;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <input type="email" id="email" placeholder="Email" required style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; font-size: 1em;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <input type="password" id="password" placeholder="Password" required style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; font-size: 1em;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <input type="password" id="confirm-password" placeholder="Confirm Password" required style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; font-size: 1em;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <input type="file" id="profile-picture" accept="image/*" required style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; font-size: 1em;">
+                </div>
+                <button type="submit" style="padding: 10px 15px; background-color: #007bff; color: #fff; border: none; border-radius: 5px; font-size: 1em; cursor: pointer;">Sign Up</button>
+            </form>
+            <p style="margin-top: 15px;">Already have an account? <a href="login.html">Log in here</a></p>
+            <button onclick="window.location.href='index.html'" style="margin-top: 10px; padding: 10px 15px; background-color: #0e5d7c; color: #fff; border: none; border-radius: 5px; font-size: 1em; cursor: pointer;">Go Back Home</button>
+        </div>
+    </div>
+
+    <script>
+        function handleSignUp(event) {
+            event.preventDefault();
+
+            const formData = new FormData();
+            formData.append('username', document.getElementById('username').value);
+            formData.append('email', document.getElementById('email').value);
+            formData.append('password', document.getElementById('password').value);
+            formData.append('profilePicture', document.getElementById('profile-picture').files[0]);
+
+            fetch('/signup', {
+                method: 'POST',
+                body: formData,
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Account created successfully!');
+                        window.location.href = 'login.html';
+                    } else {
+                        alert('Error: ' + data.message);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+
+</html>

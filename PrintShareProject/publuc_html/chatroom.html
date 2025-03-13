@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Chat Room</title>
+    <link rel="stylesheet" href="chatroom.css">
+</head>
+<body>
+    <div class="chatroom-container">
+        <header class="chatroom-header">
+            <h1>Chat Room</h1>
+        </header>
+        <main class="chatroom-main">
+            <div id="chat-messages" class="chat-messages"></div>
+            <div id="typing-indicator" class="typing-indicator"></div>
+        </main>
+        <footer class="chatroom-footer">
+            <form id="chat-form" class="chat-form">
+                <input type="text" id="chat-input" placeholder="Type a message..." class="chat-input">
+                <button type="submit" class="chat-send-button">Send</button>
+            </form>
+        </footer>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>

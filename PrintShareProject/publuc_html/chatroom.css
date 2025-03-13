@@ -1,0 +1,158 @@
+/* Global styles */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Chatroom container */
+.chatroom-container {
+    width: 100%;
+    max-width: 600px;
+    height: 80vh;
+    background: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Header */
+.chatroom-header {
+    background-color: #007BFF;
+    color: #ffffff;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+/* Main chat area */
+.chatroom-main {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    background: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Chat messages */
+.chat-messages .message {
+    padding: 10px 15px;
+    border-radius: 12px;
+    max-width: 75%;
+    word-wrap: break-word;
+    font-size: 1rem;
+}
+
+/* Different styles for sent and received messages */
+.message.sent {
+    align-self: flex-end;
+    background: #007BFF;
+    color: #ffffff;
+}
+
+.message.received {
+    align-self: flex-start;
+    background: #e0e0e0;
+    color: #333;
+}
+
+/* Footer and input area */
+.chatroom-footer {
+    padding: 10px;
+    background-color: #ffffff;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: center;
+}
+
+.chat-form {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.chat-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.chat-input:focus {
+    border-color: #007BFF;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.chat-send-button {
+    background: #007BFF;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease-in-out;
+}
+
+.chat-send-button:hover {
+    background: #0056b3;
+}
+
+/* Scrollbar styling */
+.chatroom-main::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chatroom-main::-webkit-scrollbar-thumb {
+    background-color: #ddd;
+    border-radius: 4px;
+}
+
+.chatroom-main::-webkit-scrollbar-thumb:hover {
+    background-color: #bbb;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .chatroom-container {
+        width: 90%;
+    }
+}
+.message {
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.message small {
+    display: block;
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 5px;
+}
+
+#typing-indicator {
+    font-style: italic;
+    color: #888;
+    padding: 10px;
+    text-align: center;
+}

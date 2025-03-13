@@ -1,0 +1,424 @@
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    background-color: #f9f9f9;
+    line-height: 1.6;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #f5f5f5;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    color: #222;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+    color: #555;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+}
+
+.button.primary {
+    background-color: #681f1f;
+    color: white;
+    border: none;
+}
+
+.button.primary:hover {
+    background-color: #0c4c5c;
+}
+
+.button.secondary {
+    background-color: white;
+    color: #0c4c5c;
+    border: 2px solid #0c4c5c;
+    padding: 5px 10px;
+    font-size: 0.9rem;
+}
+
+.button.secondary:hover {
+    background-color: #0c4c5c;
+    color: white;
+}
+
+/* Search Bar */
+.search-bar {
+    margin: 20px auto;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.search-bar input {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.search-bar button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.search-bar button:hover {
+    background-color: #0c4c5c;
+}
+
+/* Features Section */
+.features {
+    display: flex;
+    justify-content: space-around;
+    padding: 30px 20px;
+    background-color: #ffffff;
+    margin-top: 20px;
+}
+
+.feature-item {
+    flex: 1;
+    text-align: center;
+    padding: 20px;
+    margin: 10px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+}
+
+.feature-item h3 {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    color: #222;
+}
+
+.feature-item p {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Post Creation Section */
+.new-post-section {
+    text-align: center;
+    padding: 20px;
+    margin: 20px auto;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    width: 80%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.new-post-section textarea {
+    width: 90%;
+    height: 80px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+}
+
+.new-post-section button {
+    padding: 10px 20px;
+    background-color: #043a3a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.new-post-section button:hover {
+    background-color: #0a6672;
+}
+
+/* Footer CTA Section */
+.cta-section {
+    text-align: center;
+    padding: 30px 20px;
+    background: linear-gradient(120deg, #0a6672, #0a6672);
+    color: white;
+    margin-top: 20px;
+    border-radius: 10px 10px 0 0;
+}
+
+.cta-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.cta-section p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+.cta-section .button {
+    background-color: white;
+    color: #0a6672;
+    font-size: 1.2rem;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 5px;
+}
+
+.cta-section .button:hover {
+    background-color: #072b28;
+    color: white;
+}
+
+/* Image Grid Section */
+.image-grid {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 6 columns per row */
+    gap: 15px; /* Space between grid items */
+    width: 90%; /* Centered and responsive */
+    max-width: 1200px; /* Maximum width for large screens */
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    overflow-y: auto;
+    max-height: 600px;
+}
+
+/* Post Card */
+.post-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    text-align: center; /* Center content */
+    display: flex;
+    flex-direction: column; /* Ensure consistent alignment */
+}
+
+.post-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Post Card Image */
+.post-card img {
+    width: 100%; /* Fit width */
+    height: 150px; /* Fixed height for uniformity */
+    object-fit: cover; /* Maintain aspect ratio while cropping */
+    border-bottom: 1px solid #ddd;
+}
+
+/* Post Card Title */
+.post-card h3 {
+    font-size: 1rem;
+    margin: 10px 0;
+    color: #222;
+    padding: 0 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden; /* Truncate long titles */
+}
+
+/* Post Card Content */
+.post-card p {
+    font-size: 0.9rem;
+    color: #555;
+    padding: 0 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limit content to 3 lines */
+    line-clamp: 3; /* Standard property for compatibility */
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+}
+
+/* View Post Button */
+.post-card .view-post-button {
+    margin: auto 10px 10px; /* Center horizontally and add spacing */
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.post-card .view-post-button:hover {
+    background-color: #0056b3;
+}
+
+/* User Info */
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.user-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.user-name {
+    font-size: 1rem;
+    color: #333;
+}
+
+/* User Actions */
+.user-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+/* Live Chat Section */
+.live-chat-section {
+    text-align: center;
+    padding: 20px;
+    margin: 20px auto;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    width: 80%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.chat-messages {
+    max-height: 300px; /* Set a fixed height */
+    overflow-y: auto; /* Enable vertical scrolling */
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.chat-messages .message {
+    padding: 10px 15px;
+    border-radius: 12px;
+    max-width: 75%;
+    word-wrap: break-word;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.message.sent {
+    align-self: flex-end;
+    background: #007BFF;
+    color: #ffffff;
+}
+
+.message.received {
+    align-self: flex-start;
+    background: #e0e0e0;
+    color: #333;
+}
+
+.chat-form {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.chat-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.chat-input:focus {
+    border-color: #007BFF;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.chat-send-button {
+    background: #007BFF;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease-in-out;
+}
+
+.chat-send-button:hover {
+    background: #0056b3;
+}
+
+/* Scrollbar styling */
+.chat-messages::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background-color: #ddd;
+    border-radius: 4px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+    background-color: #bbb;
+}
+
+/* Profile Picture */
+.profile-pic {
+    width: 40px; /* Set a fixed width */
+    height: 40px; /* Set a fixed height */
+    border-radius: 50%; /* Make it round */
+}

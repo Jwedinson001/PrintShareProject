@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrintShare</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <!-- User Actions -->
+    <div id="user-actions" class="user-actions" style="display: none;">
+        <div class="user-info">
+            <img id="profile-pic" src="images/user.png" alt="Profile Picture" class="profile-pic">
+            <span id="username-display" class="username-display"></span>
+        </div>
+        <button id="account-btn" class="button secondary" onclick="goToAccount()">Account</button>
+        <button id="settings-btn" class="button secondary" onclick="goToSettings()">Settings</button>
+        <button id="logout-btn" class="button secondary" onclick="logout()">Logout</button>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <h1>Welcome to our 3D PRINTING Community!</h1>
+        <p>Join us to explore, create, and connect with fellow enthusiasts. Share your designs, get inspired, and engage
+            in live discussions.</p>
+        <div class="hero-buttons">
+            <a href="signUpPage.html" id="sign-up-btn" class="button primary">Create Account</a>
+            <a href="login.html" id="log-in-btn" class="button secondary">Log In</a>
+        </div>
+    </header>
+
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Search posts, topics, or users">
+        <button onclick="handleSearch()">Search</button>
+    </div>
+
+    <!-- Image Grid Section -->
+    <section class="image-grid">
+        <div class="grid-container" id="post-grid">
+            <!-- Example Post Card -->
+            <div class="post-card">
+                <img src="example_post_image.jpg" alt="Example Post" class="post-image">
+                <div class="post-details">
+                    <h3 class="post-title">Amazing 3D Print of a Dragon</h3>
+                    <p class="post-content">This 3D print showcases a detailed dragon model created using advanced texturing techniques.</p>
+                    <div class="user-info">
+                        <img src="user_avatar.jpg" alt="John Doe" class="user-image">
+                        <p class="user-name">John Doe</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Additional post cards can be dynamically loaded or added here -->
+        </div>
+    </section>
+
+    <!-- Post Creation Section -->
+    <section class="new-post-section">
+        <h3>Create a Post</h3>
+        <input type="text" id="post-title" placeholder="Enter post title" required>
+        <textarea id="post-content" placeholder="Write your post content here..." required></textarea>
+        <input type="file" id="post-image" accept="image/*">
+        <button onclick="createPost()">Post</button>
+    </section>
+
+    <!-- Live Chat Section -->
+    <section class="live-chat-section">
+        <h3>Live Chat</h3>
+        <div id="chat-messages" class="chat-messages"></div>
+        <form id="chat-form" class="chat-form">
+            <input type="text" id="chat-input" placeholder="Type a message..." class="chat-input">
+            <button type="submit" class="chat-send-button">Send</button>
+        </form>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="feature-item">
+            <h3>Create an Account</h3>
+            <p>Sign up to access personalized features like posting and commenting.</p>
+        </div>
+        <div class="feature-item">
+            <h3>Upload 3D Prints</h3>
+            <p>Share your designs with the community by uploading images of your 3D prints.</p>
+        </div>
+        <div class="feature-item">
+            <h3>Join Live Discussions</h3>
+            <p>Engage in real-time conversations by joining chat rooms with other enthusiasts.</p>
+        </div>
+    </section>
+
+    <!-- Call-to-Action Section -->
+    <footer class="cta-section">
+        <h2>Join our community today!</h2>
+        <p>Create an account to unlock all the features and connect with fellow 3D printing enthusiasts.</p>
+        <a href="signUpPage.html" class="button primary">Sign Up Now</a>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="index.js"></script>
+</body>
+
+</html>

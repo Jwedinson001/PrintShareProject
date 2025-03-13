@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - PrintShare</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="global.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="content" style="justify-content: center; align-items: center; flex-direction: column;">
+            <h1 style="margin-bottom: 20px;">Login to PrintShare</h1>
+            <form id="login-form" onsubmit="handleLogin(event)"
+                style="width: 100%; max-width: 400px; text-align: center;">
+                <div style="margin-bottom: 15px;">
+                    <input type="text" id="username" placeholder="Username" required
+                        style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; font-size: 1em;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <input type="password" id="password" placeholder="Password" required
+                        style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; font-size: 1em;">
+                </div>
+                <button type="submit"
+                    style="padding: 10px 15px; background-color: #007bff; color: #fff; border: none; border-radius: 5px; font-size: 1em; cursor: pointer;">
+                    Login
+                </button>
+            </form>
+            <p style="margin-top: 15px;">Don't have an account? <a href="signUpPage.html">Sign up here</a></p>
+
+            <button onclick="window.location.href='index.html'"
+                style="margin-top: 10px; padding: 10px 15px; background-color: #0e5d7c; color: #fff; border: none; border-radius: 5px; font-size: 1em; cursor: pointer;">
+                Go Back Home
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function handleLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            fetch('/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password }),
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Login failed');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        alert('Login successful!');
+                        localStorage.setItem('userId', data.userId);       // Save user ID
+                        localStorage.setItem('username', data.username);   // Save username
+                        localStorage.setItem('profilePictureUrl', data.profilePictureUrl); // Save profile picture
+                        window.location.href = 'index.html';
+                    } else {
+                        alert('Login failed: ' + data.message);
+                    }
+                })
+                .catch(err => {
+                    console.error('Error:', err);
+                    alert('An error occurred while logging in. Please try again.');
+                });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Details</title>
+    <link rel="stylesheet" href="main.css">
+    <style>
+        /* General Reset */
+        body, h1, h2, p, ul, li, textarea, button {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px 20px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .navbar button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .navbar button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Page Layout */
+        .container {
+            display: flex;
+            margin: 20px;
+        }
+
+        #post-column {
+            flex: 1 1 33%;
+            background-color: #fff;
+            padding: 20px;
+            margin-right: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #post-column img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        #comments-section {
+            flex: 2 1 67%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #comments-section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #comments-section li {
+            background-color: #f9f9f9;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 60px;
+            margin-bottom: 10px;
+            resize: none;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <h1>Post Details</h1>
+        <div class="actions">
+            <button onclick="window.location.href='index.html'">Home</button>
+            <button onclick="window.location.href='account.html'">Account</button>
+            <button onclick="window.location.href='settings.html'">Settings</button>
+            <button onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <div class="container">
+        <!-- Left Column for Post Details -->
+        <div id="post-column">
+            <h2 id="post-title">Post Title</h2>
+            <img id="post-image" src="" alt="Post Image" style="display: none;">
+            <p id="post-content">Post Content</p>
+        </div>
+
+        <!-- Right Section for Comments -->
+        <div id="comments-section">
+            <h2>Comments</h2>
+            <ul id="comments-list">
+                <!-- Comments will be added here -->
+            </ul>
+            <form id="comment-form">
+                <textarea id="comment-content" placeholder="Add a comment"></textarea>
+                <button type="submit">Post Comment</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const postId = new URLSearchParams(window.location.search).get('postId');
+
+            // Fetch and display post details
+            fetch(`/get-post-details?postId=${postId}`)
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.success) {
+                        document.getElementById('post-title').textContent = data.post.title;
+                        document.getElementById('post-content').textContent = data.post.content;
+
+                        if (data.post.image_url) {
+                            const postImage = document.getElementById('post-image');
+                            postImage.src = data.post.image_url;
+                            postImage.style.display = 'block';
+                        }
+                    }
+                })
+                .catch((error) => console.error('Error fetching post details:', error));
+
+            // Fetch and display comments
+            fetch(`/get-comments?postId=${postId}`)
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.success) {
+                        const commentsList = document.getElementById('comments-list');
+                        commentsList.innerHTML = ''; // Clear existing comments
+                        data.comments.forEach((comment) => {
+                            const commentItem = document.createElement('li');
+                            commentItem.textContent = comment.content;
+                            commentsList.appendChild(commentItem);
+                        });
+                    }
+                })
+                .catch((error) => console.error('Error fetching comments:', error));
+
+            // Handle adding a new comment
+            const commentForm = document.getElementById('comment-form');
+            commentForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const commentContent = document.getElementById('comment-content').value;
+                const userId = localStorage.getItem('userId');
+
+                if (!userId) {
+                    alert('You need to be logged in to comment.');
+                    return;
+                }
+
+                fetch('/add-comment', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ postId, userId, content: commentContent }),
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data.success) {
+                            alert('Comment added successfully!');
+                            location.reload();
+                        } else {
+                            alert('Error: ' + data.message);
+                        }
+                    })
+                    .catch((error) => console.error('Error adding comment:', error));
+            });
+        });
+
+        function logout() {
+            localStorage.clear();
+            alert('You have been logged out.');
+            window.location.reload();
+        }
+    </script>
+</body>
+</html>
